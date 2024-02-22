@@ -88,3 +88,125 @@ Created an ansible_playbook directory and wrote a playbook named install_nginx.y
         enabled: yes
 ```
 
+### Screenshot
+![Screenshot from 2024-02-22 10-40-50](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/44a3921e-f528-49df-b4ff-b7104dbde5e8)
+
+### Step 9: Deploying Nginx on Dev Servers
+Successfully installed and started Nginx on server-1 and server-2.
+
+### Screenshot
+![Screenshot from 2024-02-22 10-41-41](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/6e84b587-dff1-4555-9659-a797fdecb2d3)
+
+![Screenshot from 2024-02-22 10-48-17](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/a8af580a-98df-4751-9269-e2ccd6e212bd)
+
+![Screenshot from 2024-02-22 10-48-40](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/0b8cc112-dd56-4a29-9bd1-09f2b272e0dc)
+
+### Step 10: Static Web Page Deployment on Production Server
+Within the ansible_playbook directory, created index.html and a playbook named static_page.yml for installing Nginx, starting it, and serving a static web page on server-3.
+```yaml
+-
+  name: Install Nginx and Serve Static Website
+  hosts: production-env
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: latest
+    - name: Start Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+    - name: Deploy Static WebPage
+      copy:
+        src: index.html
+        dest: /var/www/html/
+```
+
+```html
+<!-- Contents of index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ansible for DevOps</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+    .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+    }
+    h1, h2 {
+        color: #333;
+    }
+    p {
+        margin: 10px 0;
+        line-height: 1.6;
+    }
+    .fade-in {
+        animation: fadeInAnimation ease 3s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+    @keyframes fadeInAnimation {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="container fade-in">
+    <h1>Ansible for DevOps</h1>
+    
+    <h2>Use Cases</h2>
+    <p>Ansible can be used for configuration management, application deployment, task automation, and IT orchestration.</p>
+    
+    <h2>Principles of Ansible</h2>
+    <p>Ansible operates on an agentless architecture, leveraging SSH for communication. Its simplicity, repeatability, and security are core principles.</p>
+    
+    <h2>Why Use Ansible?</h2>
+    <p>Ansible is easy to learn and use, does not require special agent software to be installed on nodes, and can manage complex deployments and configurations.</p>
+    
+    <h2>Advantages</h2>
+    <p>Advantages include its agentless architecture, flexibility, scalability, and the vast community support providing modules for various integrations.</p>
+    
+    <h2>Architecture</h2>
+    <p>Ansible uses a simple architecture with Playbooks written in YAML, which describe the automation jobs, and an inventory file that lists the nodes to be managed.</p>
+</div>
+<script>
+    // Example JavaScript for interaction or more complex animations
+    document.addEventListener('DOMContentLoaded', function() {
+        // Simple interaction or more complex animations can go here
+    });
+</script>
+</body>
+</html>
+```
+### Screenshot
+![Screenshot from 2024-02-22 11-15-11](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/3cebc496-ab02-42fa-bb99-b31fd0ed0c1d)
+
+![Screenshot from 2024-02-22 11-11-17](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/aa468e8c-3b05-4007-8d91-0d1cc2df48db)
+
+### Step 11: Successful Deployment
+Successfully deployed the static page on server-3.
+
+### Screenshot
+![Screenshot from 2024-02-22 11-14-48](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/45951c11-dc9d-4f23-acd1-04a061064f7a)
+
+![Screenshot from 2024-02-22 11-17-01](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/8d8fac6d-ed2d-48a9-9853-de0575951b29)
+
+## Conclusion
+This project illustrates the power of Ansible for automating deployment tasks in a cloud environment, simplifying the management of multiple servers and the deployment of services like Nginx.
