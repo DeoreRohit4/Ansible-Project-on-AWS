@@ -1,4 +1,4 @@
-# Ansible Project on AWS: Automated Nginx Deployment
+# Ansible-AWS-Nginx-Deployment
 
 ## Project Overview
 This project demonstrates the use of Ansible for automating the deployment of Nginx on AWS EC2 instances. The setup includes one Ansible master server and three target servers. Nginx was installed and started on two development servers (server-1 and server-2), and on the third server (server-3), designated as the production server, Nginx was installed, started, and used to serve a static web page.
