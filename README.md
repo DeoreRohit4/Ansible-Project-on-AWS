@@ -30,4 +30,61 @@ sudo apt install ansible
 
 ![Screenshot from 2024-02-21 19-04-48](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/dbebb90e-2b21-4cd8-b494-1a1af4f847de)
 
+### Step 3: Key Transfer
+Copied the private key from the local machine to the ansible-master-server using the SCP command:
+```bash
+scp -i "ansible-master-key.pem" ansible-master-key.pem ubuntu@ec2-3-83-240-22.compute-1.amazonaws.com:/home/ubuntu/keys
+```
+### Screenshot
+![Screenshot from 2024-02-21 19-24-47](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/c631854d-b3da-448b-87e4-6f974449b630)
+
+![Screenshot from 2024-02-21 19-25-24](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/99bac3ff-4f03-4a20-acac-291fab25d1e4)
+
+### Step 4: Hosts Configuration
+Configured the /etc/ansible/hosts file to include the three servers, adding them under a specific variable for easier management.
+
+### Screenshot
+![Screenshot from 2024-02-22 09-51-56](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/993d4207-ae73-48cf-918b-335d96790fd1)
+
+### Step 5: Testing Connections
+Verified connectivity to all servers from the ansible-master-server using the command:
+```bash
+ansible servers -m ping
+```
+
+### Screenshot
+![Screenshot from 2024-02-22 09-56-01](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/e091d320-5a12-4c5a-8c9b-f4cb388707f5)
+
+### Step 6: Updating Servers
+Executed an ad-hoc command to update all servers:
+```bash
+ansible servers -a "sudo apt update"
+```
+### Screenshot
+![Screenshot from 2024-02-22 09-59-21](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/3b1ccd8c-6302-43ea-989f-eead9b5bcf93)
+
+### Step 7: Environment Grouping
+In /etc/ansible/hosts, grouped server-1 and server-2 under dev-env, and server-3 under production-env. Set variables accordingly.
+
+### Screenshot
+![Screenshot from 2024-02-22 10-21-28](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/d29f4564-5253-4eab-a572-635dbb2bd732)
+
+### Step 8: Nginx Installation Playbook for Dev Servers
+Created an ansible_playbook directory and wrote a playbook named install_nginx.yml to install and start Nginx on server-1 and server-2.
+```yaml
+-
+  name: Install and Start Nginx
+  hosts: dev-env
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: latest
+    - name: Start Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+```
 
