@@ -1,4 +1,5 @@
 # Ansible-AWS-Nginx-Deployment
+![Black Brown Geometric Motivational Desktop Wallpaper (1)](https://github.com/DeoreRohit4/Ansible-Project-on-AWS/assets/102886808/739fae6d-5a36-4946-9c6e-0a0a26cbac86)
 
 ## Project Overview
 This project demonstrates the use of Ansible for automating the deployment of Nginx on AWS EC2 instances. The setup includes one Ansible master server and three target servers. Nginx was installed and started on two development servers (server-1 and server-2), and on the third server (server-3), designated as the production server, Nginx was installed, started, and used to serve a static web page.
